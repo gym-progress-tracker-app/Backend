@@ -11,6 +11,9 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/users', [UserController::class, 'getUsers']);
 
+// exercise
+Route::get('/exercises-without-logged-in', [ExerciseController::class, 'getExercisesWithoutLoggedIn']);
+
 Route::middleware('auth:sanctum')->group(function () {
     //user
 	Route::get('/user', [UserController::class, 'getUser']);

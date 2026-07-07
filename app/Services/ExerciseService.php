@@ -17,6 +17,12 @@ class ExerciseService
             })
             ->get();
     }
+    public function getExercisesWithOutLoggedIn()
+    {
+        return Exercise::query()
+            ->whereNull('user_id')
+            ->get();
+    }
 
     public function createExercise(array $validated, User $user): Exercise
     {
