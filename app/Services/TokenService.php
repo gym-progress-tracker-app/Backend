@@ -11,4 +11,9 @@ class TokenService
     {
         return $user->createToken('auth_token')->plainTextToken;
     }
+
+    public function revokeCurrentToken(User $user): void
+    {
+        $user->currentAccessToken()?->delete();
+    }
 }

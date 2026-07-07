@@ -34,6 +34,11 @@ class UserService
         ];
     }
 
+    public function logout(User $user): void
+    {
+        $this->tokenService->revokeCurrentToken($user);
+    }
+
     public function getUser(User $user): User
     {
         return $user;

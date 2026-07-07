@@ -14,6 +14,7 @@ Route::get('/users', [UserController::class, 'getUsers']);
 Route::middleware('auth:sanctum')->group(function () {
     //user
 	Route::get('/user', [UserController::class, 'getUser']);
+	Route::post('/logout', [UserController::class, 'logout']);
 
     //exercise
 	Route::get('/exercises', [ExerciseController::class, 'getExercises']);

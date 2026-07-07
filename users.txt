@@ -11,3 +11,15 @@ user2:
   "email": "levi@example.com",
   "password": "secret123"
 }
+
+user3:
+{
+  lgllglg@gmail.com
+  fsdfsfsfsewr
+}
+
+user4:
+{
+  lgeeeeglg@gmail.com
+  fsffsfsayxy
+}
