@@ -24,6 +24,17 @@ class ExerciseService
             ->get();
     }
 
+    public function getExerciseById(User $user, int $id): ?Exercise
+    {
+        return Exercise::query()
+            ->where('id', $id)
+            ->where(function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->orWhereNull('user_id');
+            })
+            ->first();
+    }
+
     public function createExercise(array $validated, User $user): Exercise
     {
         return Exercise::create([

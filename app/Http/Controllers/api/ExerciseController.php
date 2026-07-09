@@ -23,6 +23,19 @@ class ExerciseController extends Controller
         return $this->success($exercises, 'Exercises fetched successfully');
     }
 
+    public function getExerciseById(Request $request, ExerciseService $exerciseService, $id)
+    {
+        Gate::authorize('view', Exercise::class);
+
+        $exercise = $exerciseService->getExerciseById($request->user(), $id);
+
+        if (! $exercise) {
+            return $this->error('Exercise not found', 404);
+        }
+
+        return $this->success($exercise, 'Exercise fetched successfully');
+    }
+
     public function getExercisesWithoutLoggedIn(Request $request, ExerciseService $exerciseService)
     {
         

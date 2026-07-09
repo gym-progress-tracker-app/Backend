@@ -28,7 +28,6 @@ class ProgressLogRequest extends FormRequest
             'reps' => 'required|integer|min:1',
             'sets' => 'required|integer|min:1',
             'note' => 'nullable|string',
-            'recorded_at' => 'required|date',
         ];
     }
 }

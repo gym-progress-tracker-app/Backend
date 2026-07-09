@@ -22,9 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //exercise
 	Route::get('/exercises', [ExerciseController::class, 'getExercises']);
 	Route::post('/exercises', [ExerciseController::class, 'createExercise']);
+	Route::get('/exercises/{id}', [ExerciseController::class, 'getExerciseById']);
     
     //progress log
 	Route::get('/progresslogs/{exerciseid}', [ProgressLogController::class, 'getProgressLogByExerciseId']);
 	Route::post('/progresslogs', [ProgressLogController::class, 'createProgressLog']);
 	Route::get('/progresslogs', [ProgressLogController::class, 'getProgressLogs']);
+	
 });
