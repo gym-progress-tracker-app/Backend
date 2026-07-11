@@ -24,7 +24,7 @@ class ExerciseRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category' => 'required|string|exists:categories,name',
             'description' => 'nullable|string',
         ];
     }
