@@ -25,4 +25,11 @@ class OwnExerciseController extends Controller
 
         return $this->success($ownExercise, 'Own exercise created successfully', 201);
     }
+
+    public function removeOwnExercise(Request $request, OwnExerciseService $ownExerciseService, $id)
+    {
+        $ownExerciseService->removeOwnExercise($id, $request->user());
+
+        return $this->success(null, 'Own exercise removed successfully');
+    }
 }

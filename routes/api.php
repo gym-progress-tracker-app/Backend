@@ -30,10 +30,12 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('/exercises/{id}', [ExerciseController::class, 'getExerciseById']);
 	Route::get('/own-exercises', [OwnExerciseController::class, 'getOwnExercises']);
 	Route::post('/own-exercises', [OwnExerciseController::class, 'addOwnExercise']);
+	Route::delete('/own-exercises/{id}', [OwnExerciseController::class, 'removeOwnExercise']);
     
     //progress log
 	Route::get('/progresslogs/{exerciseid}', [ProgressLogController::class, 'getProgressLogByExerciseId']);
 	Route::post('/progresslogs', [ProgressLogController::class, 'createProgressLog']);
 	Route::get('/progresslogs', [ProgressLogController::class, 'getProgressLogs']);
+	Route::delete('/progresslogs/{progressLogId}', [ProgressLogController::class, 'deleteProgressLog']);
 	
 });

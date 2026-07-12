@@ -37,4 +37,14 @@ class OwnExerciseService
 			'exercise_id' => $exercise->id,
 		])->load(['exercise.category']);
 	}
+
+    public function removeOwnExercise(int $ExerciseId, User $user): void
+    {
+        $ownExercise = OwnExercise::query()
+            ->where('exercise_id', $ExerciseId)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        $ownExercise->delete();
+    }
 }

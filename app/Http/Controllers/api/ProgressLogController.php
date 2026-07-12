@@ -35,4 +35,13 @@ class ProgressLogController extends Controller
 
         return $this->success($progressLogs, 'Progress logs fetched successfully');
     }
+
+    public function deleteProgressLog($progressLogId, ProgressLogService $progressLogService)
+    {
+        
+
+        $progressLogService->deleteProgressLog($progressLogId, auth()->user());
+
+        return $this->success(null, 'Progress log deleted successfully');
+    }
 }

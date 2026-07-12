@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\OwnExercise;
 use App\Models\ProgressLog;
 use App\Models\User;
 
@@ -9,6 +10,11 @@ class ProgressLogService
 {
     public function createProgressLog(array $validated, User $user): ProgressLog
     {
+        OwnExercise::firstOrCreate([
+            'user_id' => $user->id,
+            'exercise_id' => $validated['exercise_id'],
+        ]);
+
         $progressLog = ProgressLog::create([
             'user_id' => $user->id,
             'exercise_id' => $validated['exercise_id'],
@@ -40,5 +46,15 @@ class ProgressLogService
             ->where('exercise_id', $exerciseid)
             ->orderByDesc('recorded_at')
             ->get();
+    }
+
+    public function deleteProgressLog(int $progressLogId, User $user): void
+    {
+        $progressLog = ProgressLog::query()
+            ->where('id', $progressLogId)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        $progressLog->delete();
     }
 }
