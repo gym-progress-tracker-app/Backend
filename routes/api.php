@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\OwnExerciseController;
 use App\Http\Controllers\api\ExerciseController;
 use App\Http\Controllers\api\ProgressLogController;
 use App\Http\Controllers\api\UserController;
@@ -27,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('/exercises', [ExerciseController::class, 'getExercises']);
 	Route::post('/exercises', [ExerciseController::class, 'createExercise']);
 	Route::get('/exercises/{id}', [ExerciseController::class, 'getExerciseById']);
+	Route::get('/own-exercises', [OwnExerciseController::class, 'getOwnExercises']);
+	Route::post('/own-exercises', [OwnExerciseController::class, 'addOwnExercise']);
     
     //progress log
 	Route::get('/progresslogs/{exerciseid}', [ProgressLogController::class, 'getProgressLogByExerciseId']);

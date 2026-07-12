@@ -45,6 +45,8 @@ class ExerciseController extends Controller
         return $this->success($exercises, 'Exercises fetched successfully');
     }
 
+    
+
     public function createExercise(ExerciseRequest $request, ExerciseService $exerciseService)
     {
         Gate::authorize('create', Exercise::class);

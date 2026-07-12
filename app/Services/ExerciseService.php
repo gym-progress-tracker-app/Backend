@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Exercise;
+use App\Models\OwnExercise;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ExerciseService
 {
@@ -36,17 +38,28 @@ class ExerciseService
             ->first();
     }
 
+
+
     public function createExercise(array $validated, User $user): Exercise
     {
         $category = Category::query()
             ->where('name', $validated['category'])
             ->firstOrFail();
 
-        return Exercise::create([
-            'name' => $validated['name'],
-            'category_id' => $category->id,
-            'user_id' => $user->id,
-            'description' => $validated['description'] ?? null,
-        ]);
+        return DB::transaction(function () use ($validated, $user, $category) {
+            $exercise = Exercise::create([
+                'name' => $validated['name'],
+                'category_id' => $category->id,
+                'user_id' => $user->id,
+                'description' => $validated['description'] ?? null,
+            ]);
+
+            OwnExercise::firstOrCreate([
+                'user_id' => $user->id,
+                'exercise_id' => $exercise->id,
+            ]);
+
+            return $exercise;
+        });
     }
 }
