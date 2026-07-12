@@ -44,4 +44,18 @@ class ProgressLogController extends Controller
 
         return $this->success(null, 'Progress log deleted successfully');
     }
+
+    public function favoriteExercise(ProgressLogService $progressLogService)
+    {
+        $favoriteExercise = $progressLogService->favoriteExercise(auth()->user());
+
+        return $this->success($favoriteExercise, 'Favorite exercise fetched successfully');
+    }
+
+    public function countProgressLogs(ProgressLogService $progressLogService)
+    {
+        $count = $progressLogService->countProgressLogs(auth()->user());
+
+        return $this->success(['count' => $count], 'Progress logs count fetched successfully');
+    }
 }

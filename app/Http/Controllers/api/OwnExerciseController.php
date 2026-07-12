@@ -32,4 +32,11 @@ class OwnExerciseController extends Controller
 
         return $this->success(null, 'Own exercise removed successfully');
     }
+
+    public function countOwnExercises(Request $request, OwnExerciseService $ownExerciseService)
+    {
+        $count = $ownExerciseService->countOwnExercises($request->user());
+
+        return $this->success(['count' => $count], 'Own exercises count fetched successfully');
+    }
 }

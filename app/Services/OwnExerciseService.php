@@ -47,4 +47,12 @@ class OwnExerciseService
 
         $ownExercise->delete();
     }
+
+
+	public function countOwnExercises(User $user): int
+	{
+		return OwnExercise::query()
+			->where('user_id', $user->id)
+			->count();
+	}
 }

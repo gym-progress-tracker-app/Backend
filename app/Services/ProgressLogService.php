@@ -57,4 +57,26 @@ class ProgressLogService
 
         $progressLog->delete();
     }
+
+    public function favoriteExercise(User $user): ?string
+    {
+        return ProgressLog::query()
+            ->join('exercises', 'progress_logs.exercise_id', '=', 'exercises.id')
+            ->where('progress_logs.user_id', $user->id)
+            ->groupBy('progress_logs.exercise_id', 'exercises.name')
+            ->orderByRaw('COUNT(*) DESC')
+            ->orderBy('exercises.name')
+            ->select('exercises.name')
+            ->selectRaw('COUNT(*) as logs_count')
+            ->value('exercises.name');
+    }
+
+    public function countProgressLogs(User $user): int
+    {
+        return ProgressLog::query()
+            ->where('user_id', $user->id)
+            ->count();
+    }
+
+    
 }
