@@ -14,6 +14,7 @@ class ExerciseService
     public function getExercises(User $user): Collection
     {
         return Exercise::query()
+            ->with('category:id,name')
             ->where(function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->orWhereNull('user_id');
@@ -23,6 +24,7 @@ class ExerciseService
     public function getExercisesWithOutLoggedIn()
     {
         return Exercise::query()
+            ->with('category:id,name')
             ->whereNull('user_id')
             ->get();
     }
